@@ -11,19 +11,23 @@ def format_code(content, language='python'):
     return content.strip()
 
 def main():
-    parser = argparse.ArgumentParser(description='Code Formatter Pro - Universal formatter')
-    parser.add_argument('file', help='File to format')
-    parser.add_argument('-l', '--language', default='python')
-    parser.add_argument('-w', '--write', action='store_true')
-    args = parser.parse_args()
-    with open(args.file, 'r') as f:
-        content = f.read()
-    formatted = format_code(content, args.language)
-    if args.write:
-        with open(args.file, 'w') as f:
-            f.write(formatted)
-        print(f"Formatted {args.file}")
-    else:
-        print(formatted)
+    try:
+        parser = argparse.ArgumentParser(description='Code Formatter Pro - Universal formatter')
+        parser.add_argument('file', help='File to format')
+        parser.add_argument('-l', '--language', default='python')
+        parser.add_argument('-w', '--write', action='store_true')
+        args = parser.parse_args()
+        with open(args.file, 'r') as f:
+            content = f.read()
+        formatted = format_code(content, args.language)
+        if args.write:
+            with open(args.file, 'w') as f:
+                f.write(formatted)
+            print(f"Formatted {args.file}")
+        else:
+            print(formatted)
+    except Exception as e:
+        print(f"Error: {e}")
+        sys.exit(1)
 if __name__ == '__main__':
     main()
